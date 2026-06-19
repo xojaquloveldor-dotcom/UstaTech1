@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary: #0058be;
+    --surface: #f8f9ff;
+    --font-display: 'Hanken Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+  }
+
+  /* Force global fonts based on DESIGN1.md & DESIGN.md */
+  html, body {
+    @apply bg-surface text-on-surface antialiased transition-colors duration-300;
+    font-family: var(--font-body);
+  }
+
+  .dark html, .dark body {
+    @apply bg-dark-surface text-dark-on-surface;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-bold;
+  }
+
+  .font-jetbrains {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  /* Glassmorphism optimized for performance and aesthetic */
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-[16px] border border-black/5 shadow-xl transition-all duration-300;
+  }
+
+  .dark .glass-card {
+    @apply bg-white/[0.04] border-white/10 shadow-[0_20px_50px_rgba(33,112,228,0.15)];
+  }
+
+  /* Utility classes for the Kinetic/Lumina system */
+  .display-lg { @apply text-4xl md:text-6xl font-black -tracking-widest leading-[1.1]; }
+  .headline-lg { @apply text-2xl md:text-4xl font-bold -tracking-wider; }
+  .body-lg { @apply text-lg md:text-xl font-normal leading-relaxed opacity-90; }
+  .label-md { @apply text-xs font-bold uppercase tracking-[0.1em] font-jetbrains opacity-80; }
+
+  .glow-primary {
+    @apply shadow-[0_0_30px_rgba(0,88,190,0.25)];
+  }
+
+  .dark .glow-primary {
+    @apply shadow-[0_0_40px_rgba(173,198,255,0.35)];
+  }
+}
+
+/* Custom Scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-surface dark:bg-dark-surface;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-outline-variant/30 dark:bg-dark-surface-highest rounded-full hover:bg-primary transition-colors;
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(1deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
